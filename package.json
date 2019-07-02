@@ -1,0 +1,25 @@
+{
+  "name": "s3-db",
+  "version": "0.1.0",
+  "description": "Cheap database using AWS S3, APIGateway, AWS Lambda actor",
+  "main": "handler.ts",
+  "scripts": {
+  },
+  "dependencies": {
+    "ioredis": "^4.10.0",
+    "source-map-support": "^0.5.12"
+  },
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.27",
+    "@types/ioredis": "^4.0.12",
+    "@types/node": "10",
+    "aws-sdk": "^2.486.0",
+    "serverless-webpack": "^5.2.0",
+    "ts-loader": "^6.0.4",
+    "typescript": "^3.5.2",
+    "webpack": "^4.35.2",
+    "webpack-node-externals": "^1.7.2"
+  },
+  "author": "jaeyoung.choi <lactrious@gmail.com>",
+  "license": "MIT"
+}
