@@ -1,20 +1,36 @@
 service:
   name: s3-db
-#app: your-app-name
-#tenant: your-tenant-name
 
-# Add the serverless-webpack plugin
 plugins:
   - serverless-webpack
 
 provider:
   name: aws
   runtime: nodejs10.x
+  region: ap-northeast-2
+  environment:
+    REDIS_HOST: ${env:REDIS_HOST}
+    REDIS_PASSWORD: ${env:REDIS_PASSWORD}
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - lambda:InvokeFunction
+      Resource: "*"
 
 functions:
-  hello:
-    handler: handler.hello
+  put:
+    handler: src/handler.put
+    timeout: 900
+    events:
+      - http:
+          method: put
+          path: /
+  get:
+    handler: src/handler.get
     events:
       - http:
           method: get
-          path: hello
+          path: /
+# Lambda timeout
+# Lock TTL
+# Lock owner
