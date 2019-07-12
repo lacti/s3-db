@@ -1,7 +1,3 @@
-// tslint:disable-next-line:interface-name
-export interface RecurrentLambdaEvent {
-  recurrent: true;
-  path: string;
+export interface IActorLambdaEvent {
+  actorName: string;
 }
-
-export const isRecurrentLambdaEvent = (event: any) => event.recurrent;

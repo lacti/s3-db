@@ -1,6 +1,6 @@
-export interface IQueue<T> {
+export interface IQueue {
   size(actorName: string): Promise<number>;
-  push(actorName: string, item: T): Promise<void>;
-  pop(actorName: string): Promise<T>;
-  peek(actorName: string): Promise<T>;
+  push<T>(actorName: string, item: T): Promise<void>;
+  pop<T>(actorName: string): Promise<T>;
+  peek<T>(actorName: string): Promise<T>;
 }

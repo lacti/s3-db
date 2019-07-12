@@ -1,75 +1,29 @@
-import {
-  APIGatewayProxyEvent,
-  APIGatewayProxyResult,
-  Handler,
-} from "aws-lambda";
-import { Lambda } from "aws-sdk";
-import { Director, IActorDelegate, IActorRotate } from "../actor-system";
-import { isRecurrentLambdaEvent, RecurrentLambdaEvent } from "./event";
+import { APIGatewayProxyHandler, Handler } from "aws-lambda";
+import { Actor } from "../actor-system";
+import { IActorLambdaEvent } from "./event";
 
-export type AWSLambdaActorHandler = Handler<
-  APIGatewayProxyEvent | RecurrentLambdaEvent,
-  APIGatewayProxyResult | void
->;
+const defaultAPIProxyFunctionTimeoutMillis = 6 * 1000;
+const defaultLambdaFunctionTimeoutMillis = 14 * 60 * 1000;
 
-const invokeNextLambda = ({
-  functionName,
-  functionVersion,
-}: {
-  functionName: string;
-  functionVersion: string;
-}) => async (actorName: string) => {
-  const lambda = new Lambda();
-  const invoked = await lambda
-    .invoke({
-      FunctionName: functionName,
-      InvocationType: "Event",
-      Qualifier: functionVersion,
-      Payload: JSON.stringify({
-        recurrent: true,
-        path: actorName,
-      } as RecurrentLambdaEvent),
-    })
-    .promise();
-  console.log(invoked);
+type IActorFactory = (actorName: string) => Actor<any>;
+
+export const handleActorLambdaEvent = (
+  actorFactory: IActorFactory,
+  functionTimeout: number = defaultLambdaFunctionTimeoutMillis
+): Handler<IActorLambdaEvent, void> => async event => {
+  await actorFactory(event.actorName).tryToProcess({
+    shiftTimeout: functionTimeout
+  });
 };
 
-export const rotateForAPIGatewayLambda = (context: {
-  functionName: string;
-  functionVersion: string;
-}): IActorRotate => ({
-  timeout: 3 * 1000,
-  onNext: invokeNextLambda(context),
-});
-
-export const rotateForRecurrentLambda = (context: {
-  functionName: string;
-  functionVersion: string;
-}): IActorRotate => ({
-  timeout: 14 * 60 * 1000,
-  onNext: invokeNextLambda(context),
-});
-
-export const actorOnAWSLambda = <T>(director: Director<T>) => (
-  onAct: IActorDelegate<T>["onAct"],
-  onError: IActorDelegate<T>["onError"] = console.error,
-): AWSLambdaActorHandler => async (event, context) => {
-  const inRecurrentLambda = isRecurrentLambdaEvent(event);
-  const actor = await director({
-    name: event.path,
-    onAct,
-    onError,
-    rotate: inRecurrentLambda
-      ? rotateForRecurrentLambda(context)
-      : rotateForAPIGatewayLambda(context),
+export const handleActorAPIEvent = (
+  actorFactory: IActorFactory,
+  functionTimeout: number = defaultAPIProxyFunctionTimeoutMillis
+): APIGatewayProxyHandler => async event => {
+  const actor = actorFactory(event.path);
+  await actor.post(JSON.parse(event.body));
+  await actor.tryToProcess({
+    shiftTimeout: functionTimeout
   });
-  if (inRecurrentLambda) {
-    await actor.tryToProcessQueue();
-  } else {
-    await actor.postMessage(JSON.parse((event as APIGatewayProxyEvent).body));
-    return {
-      statusCode: 200,
-      body: "OK",
-    };
-  }
+  return { statusCode: 200, body: "OK" };
 };

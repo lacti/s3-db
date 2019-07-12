@@ -1,63 +1,72 @@
-import { IActorDelegate } from "./delegate";
-import { IStage } from "./stage";
+import { EventBroker } from "../event";
+import { ILock } from "./lock";
+import { IQueue } from "./queue";
 
-export class Actor<T> {
+interface IActorEventMap<T> {
+  act: T;
+  error: Error;
+  shift: /* name */ string;
+}
+
+interface IActorProcessOptions {
+  shiftTimeout?: number;
+}
+
+export class Actor<T> extends EventBroker<IActorEventMap<T>> {
   constructor(
-    private readonly stage: IStage<T>,
-    private readonly delegate: IActorDelegate<T>,
-  ) {}
-
-  public async postMessage(item: T) {
-    await this.stage.queue.push(this.delegate.name, item);
-    console.log(`push`, item);
-    await this.tryToProcessQueue();
-    console.log(`out-of-post-message`);
+    public readonly name: string,
+    private readonly queue: IQueue,
+    private readonly lock: ILock
+  ) {
+    super();
   }
 
-  public async tryToProcessQueue() {
-    const { name, onAct, onError, rotate } = this.delegate;
+  public async post(item: T) {
+    await this.queue.push(this.name, item);
+    console.log(`push`, item);
+  }
+
+  public async tryToProcess({ shiftTimeout }: IActorProcessOptions = {}) {
     const startMillis = Date.now();
     const isAlive = () =>
-      rotate ? Date.now() - startMillis < rotate.timeout : true;
+      shiftTimeout > 0 ? Date.now() - startMillis < shiftTimeout : true;
 
-    const { mutex, queue } = this.stage;
+    const { name, queue, lock } = this;
     while (true) {
       console.log(`try-to-lock`, name);
-      if (!(await mutex.tryLock(name))) {
+      if (!(await lock.tryAcquire(name))) {
         console.log(`cannot-get-a-lock`);
         break;
       }
       console.log(`check-the-queue-size`, name);
       while (isAlive() && (await queue.size(name)) > 0) {
-        const item = await queue.peek(name);
+        const item = await queue.peek<T>(name);
         console.log(`get-item-from-queue`, name, item);
         try {
           console.log(`act`, name, item);
-          await maybeAwait(onAct(item));
+          await maybeAwait(this.fire("act", item));
         } catch (error) {
           console.log(`error`, name, item, error);
-          if (onError) {
-            await maybeAwait(onError(error));
-          }
+          await maybeAwait(this.fire("error", error));
         }
         console.log(`delete-item-from-queue`, name);
         await queue.pop(name);
       }
       console.log(`release-a-lock`, name);
-      await mutex.release(name);
+      await lock.release(name);
       if ((await queue.size(name)) === 0) {
         console.log(`queue-is-empty`, name);
         break;
       }
-      if (rotate && !isAlive()) {
-        await maybeAwait(rotate.onNext(name));
+      if (!isAlive()) {
+        await maybeAwait(this.fire("shift", name));
         break;
       }
     }
   }
 }
 
-const maybeAwait = async (maybePromise: void | Promise<void>) => {
+const maybeAwait = async (maybePromise: any | Promise<any>) => {
   if (maybePromise && maybePromise instanceof Promise) {
     await maybePromise;
   }

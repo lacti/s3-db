@@ -1,18 +1,18 @@
-export interface ICodec<T, U> {
-  encode(item: T): U;
-  decode(value: U): T;
+export interface ICodec<B> {
+  encode<T>(item: T): B;
+  decode<T>(value: B): T;
 }
 
-export class JsonCodec<T> implements ICodec<T, string> {
+export class JsonCodec implements ICodec<string> {
   private static readonly Undefined = "undefined";
 
-  public encode(item: T) {
+  public encode<T>(item: T) {
     if (item === undefined) {
       return JsonCodec.Undefined;
     }
     return JSON.stringify(item);
   }
-  public decode(value: string) {
+  public decode<T>(value: string) {
     if (value === undefined) {
       return undefined;
     }

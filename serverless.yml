@@ -31,6 +31,3 @@ functions:
       - http:
           method: get
           path: /
-# Lambda timeout
-# Lock TTL
-# Lock owner

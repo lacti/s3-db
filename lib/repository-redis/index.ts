@@ -1,24 +1,39 @@
 import * as IORedis from "ioredis";
 import { ICodec, JsonCodec } from "../codec";
-import { IRepository } from "../repository";
+import { SimpleRepository } from "../repository";
 
-export class RedisRepository<T> implements IRepository<T> {
-  constructor(
-    private readonly repositoryName: string,
-    private readonly redis: IORedis.Redis = new IORedis(),
-    private readonly codec: ICodec<T, string> = new JsonCodec<T>(),
-  ) {}
+interface IRedisRepositoryArguments {
+  redis: IORedis.Redis;
+  prefix: string;
+  codec: ICodec<string>;
+}
 
-  public async get(key: string) {
+export class RedisRepository extends SimpleRepository {
+  private readonly redis: IORedis.Redis;
+  private readonly prefix: string;
+  private readonly codec: ICodec<string>;
+
+  constructor({
+    redis,
+    prefix,
+    codec
+  }: Partial<IRedisRepositoryArguments> = {}) {
+    super();
+    this.redis = redis || new IORedis();
+    this.codec = codec || new JsonCodec();
+    this.prefix = prefix;
+  }
+
+  public async get<T>(key: string) {
     try {
-      return this.codec.decode(await this.redis.get(this.asRedisKey(key)));
+      return this.codec.decode<T>(await this.redis.get(this.asRedisKey(key)));
     } catch (error) {
       console.error(error);
       return undefined;
     }
   }
 
-  public async set(key: string, value: T) {
+  public async set<T>(key: string, value: T) {
     if (value === undefined) {
       return this.delete(key);
     }
@@ -29,7 +44,15 @@ export class RedisRepository<T> implements IRepository<T> {
     await this.redis.del(this.asRedisKey(key));
   }
 
+  public async withPrefix(prefix: string) {
+    return new RedisRepository({
+      redis: this.redis,
+      prefix,
+      codec: this.codec
+    });
+  }
+
   private asRedisKey(key: string) {
-    return `repo:${this.repositoryName}:${key}`;
+    return this.prefix ? `repo:${this.prefix}:${key}` : `repo:${key}`;
   }
 }
