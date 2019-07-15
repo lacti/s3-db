@@ -5,6 +5,10 @@
   "main": "handler.ts",
   "scripts": {},
   "dependencies": {
+    "@yingyeothon/actor-system": "^0.1.2",
+    "@yingyeothon/actor-system-aws-lambda-support": "^0.1.1",
+    "@yingyeothon/actor-system-redis-support": "^0.1.0",
+    "@yingyeothon/repository-redis": "^0.1.0",
     "ioredis": "^4.10.0",
     "source-map-support": "^0.5.12"
   },

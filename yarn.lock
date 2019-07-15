@@ -252,6 +252,55 @@
   resolved "https://registry.yarnpkg.com/@xtuc/long/-/long-4.2.2.tgz#d291c6a4e97989b5c61d9acf396ae4fe133a718d"
   integrity sha512-NuHqBY1PB/D8xU6s/thBgOAiAP7HOYDQ32+BFZILJ8ivkUkAHQnWfn6WhL79Owj1qmUnoN/YPhktdIoucipkAQ==
 
+"@yingyeothon/actor-system-aws-lambda-support@^0.1.1":
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/@yingyeothon/actor-system-aws-lambda-support/-/actor-system-aws-lambda-support-0.1.1.tgz#808b5e92c6352b88bde4f8e427c970786f226d9f"
+  integrity sha512-xXZTCyR79o8x0etq/pRQoCJqipVy3mG1LwhfqgF9i7fhLNNJWkUfKUg3fG2XeUJA66Tae7faFK1s1NzUHSKBpQ==
+  dependencies:
+    "@yingyeothon/actor-system" "^0.1.2"
+  optionalDependencies:
+    aws-sdk "2.437.0"
+
+"@yingyeothon/actor-system-redis-support@^0.1.0":
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/@yingyeothon/actor-system-redis-support/-/actor-system-redis-support-0.1.0.tgz#3f9f975babaaef0003216a823525a4726917cf75"
+  integrity sha512-rPHfG2ZOKZ8sviEttvH+5x7mrEegXW80Er56InyMShIk/VdjPOlV6IZXq5j8QyDCkW7P6BRwXwp6O1EoO8YehQ==
+  dependencies:
+    "@yingyeothon/actor-system" "^0.1.2"
+    "@yingyeothon/codec" "^0.1.0"
+    ioredis "^4.11.2"
+
+"@yingyeothon/actor-system@^0.1.2":
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/@yingyeothon/actor-system/-/actor-system-0.1.2.tgz#f46e52fa5fde3d1adb3e5c50630a6c45ee07f3a3"
+  integrity sha512-CvQoWMKw97oIrpsAkvhL+Jg7qW8OxGTvozcukfXoqx71IlVSMTzq4S0XrlytuE2Ro0QzVwyxDv7x6QUOGZYCJw==
+  dependencies:
+    "@yingyeothon/event-broker" "^0.1.0"
+
+"@yingyeothon/codec@^0.1.0":
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/@yingyeothon/codec/-/codec-0.1.0.tgz#01f25c37184bdf7327d4c38e2185705a5a058dca"
+  integrity sha512-KzEYoI32zmcknnTXVeBl9F+ADdaoQ7u2VwJZkWmm67+/GHjObvQmCO1AcwiiIN8CUdhrZG34/E94ieCdJdkANQ==
+
+"@yingyeothon/event-broker@^0.1.0":
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/@yingyeothon/event-broker/-/event-broker-0.1.0.tgz#0dd3d84cb480fc55791a9033c20d769429d23ba6"
+  integrity sha512-65Clrb9GGo5cAkwNTmYHfG/oShMuaecjUwyNGLefKCD0ekcdB3ottlVSldPlpFiM05i1QIGrnpFxY/mdzK0V6g==
+
+"@yingyeothon/repository-redis@^0.1.0":
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/@yingyeothon/repository-redis/-/repository-redis-0.1.0.tgz#7fff670291b3eccb6844e62c38136e0463d9ed79"
+  integrity sha512-qaJMiUhiX5TGxdqO/CbCXwQCpdlmP9/hx2awoJVgbb/fqCQKQNfQBkDGo2b+Iv35uz1ik3cTd6tHYh8gr99HvQ==
+  dependencies:
+    "@yingyeothon/codec" "^0.1.0"
+    "@yingyeothon/repository" "^0.1.2"
+    ioredis "^4.11.1"
+
+"@yingyeothon/repository@^0.1.2":
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/@yingyeothon/repository/-/repository-0.1.2.tgz#2d8a0142e6629aff14bcc51f46fd9ec2656d5c5a"
+  integrity sha512-0juv7B/Ow1rtxsNX83fPVDlGBxtdc3KBeVQSE1fVI9W1+Z08kUiNbs84mDV5rVpr5+ln3BjBMNfPCRyHx2I4rg==
+
 abbrev@1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/abbrev/-/abbrev-1.1.1.tgz#f8f2c887ad10bf67f634f005b6987fed3179aac8"
@@ -500,6 +549,21 @@ atob@^2.1.1:
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/atob/-/atob-2.1.2.tgz#6d9517eb9e030d2436666651e86bd9f6f13533c9"
   integrity sha512-Wm6ukoaOGJi/73p/cl2GvLjTI5JM1k/O14isD73YML8StrH/7/lRFgmg8nICZgD3bZZvjwCGxtMOD3wWNAu8cg==
+
+aws-sdk@2.437.0:
+  version "2.437.0"
+  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.437.0.tgz#94e41a2ff112aa020ddbe4950dd5f73187889b8b"
+  integrity sha512-sDZb5QBOO6FOMvuKDEdO16YQRk0WUhnQd38EaSt0yUCi4Gev8uypODyYONgODZcXe8Cr1GMwC8scUKr00S/I5w==
+  dependencies:
+    buffer "4.9.1"
+    events "1.1.1"
+    ieee754 "1.1.8"
+    jmespath "0.15.0"
+    querystring "0.2.0"
+    sax "1.2.1"
+    url "0.10.3"
+    uuid "3.3.2"
+    xml2js "0.4.19"
 
 aws-sdk@^2.482.0:
   version "2.488.0"
@@ -1210,6 +1274,13 @@ debug@^3.1.0, debug@^3.2.6:
   version "3.2.6"
   resolved "https://registry.yarnpkg.com/debug/-/debug-3.2.6.tgz#e83d17de16d8a7efb7717edbe5fb10135eee629b"
   integrity sha512-mel+jf7nrtEl5Pn1Qx46zARXKDpBbvzezse7p7LqINmdoIk8PYP5SySaxEmYv6TZ0JyEKA1hsCId6DIhgITtWQ==
+  dependencies:
+    ms "^2.1.1"
+
+debug@^4.1.1:
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/debug/-/debug-4.1.1.tgz#3b72260255109c6b589cee050f1d516139664791"
+  integrity sha512-pYAIzeRo8J6KPEaJ0VWOh5Pzkbw/RetuzehGM7QRRX5he4fPHx2rdKMB256ehJCkX+XRQm16eZLqLNS8RSZXZw==
   dependencies:
     ms "^2.1.1"
 
@@ -2224,6 +2295,21 @@ ioredis@^4.10.0:
   dependencies:
     cluster-key-slot "^1.0.6"
     debug "^3.1.0"
+    denque "^1.1.0"
+    lodash.defaults "^4.2.0"
+    lodash.flatten "^4.4.0"
+    redis-commands "1.5.0"
+    redis-errors "^1.2.0"
+    redis-parser "^3.0.0"
+    standard-as-callback "^2.0.1"
+
+ioredis@^4.11.1, ioredis@^4.11.2:
+  version "4.11.2"
+  resolved "https://registry.yarnpkg.com/ioredis/-/ioredis-4.11.2.tgz#b76c1a8290f581ce30af3fd00f27d38a301472c6"
+  integrity sha512-2lQM1jpTzoTPg9Lj+ayfcIn8rdvGwgNP/nzeJ7IW4va/ExqxttRnTlUaxa8jOsj/e4NYKtVkbuhEAvOVPwjztA==
+  dependencies:
+    cluster-key-slot "^1.0.6"
+    debug "^4.1.1"
     denque "^1.1.0"
     lodash.defaults "^4.2.0"
     lodash.flatten "^4.4.0"
