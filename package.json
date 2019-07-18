@@ -25,8 +25,7 @@
     "tslint": "^5.18.0",
     "tslint-config-prettier": "^1.18.0",
     "typescript": "^3.5.2",
-    "webpack": "^4.35.2",
-    "webpack-node-externals": "^1.7.2"
+    "webpack": "^4.35.2"
   },
   "author": "jaeyoung.choi <lactrious@gmail.com>",
   "license": "MIT"
