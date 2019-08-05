@@ -252,30 +252,49 @@
   resolved "https://registry.yarnpkg.com/@xtuc/long/-/long-4.2.2.tgz#d291c6a4e97989b5c61d9acf396ae4fe133a718d"
   integrity sha512-NuHqBY1PB/D8xU6s/thBgOAiAP7HOYDQ32+BFZILJ8ivkUkAHQnWfn6WhL79Owj1qmUnoN/YPhktdIoucipkAQ==
 
-"@yingyeothon/actor-system-aws-lambda-support@^0.1.1":
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/@yingyeothon/actor-system-aws-lambda-support/-/actor-system-aws-lambda-support-0.1.1.tgz#808b5e92c6352b88bde4f8e427c970786f226d9f"
-  integrity sha512-xXZTCyR79o8x0etq/pRQoCJqipVy3mG1LwhfqgF9i7fhLNNJWkUfKUg3fG2XeUJA66Tae7faFK1s1NzUHSKBpQ==
+"@yingyeothon/actor-system-aws-lambda-support@^0.1.3":
+  version "0.1.3"
+  resolved "https://registry.yarnpkg.com/@yingyeothon/actor-system-aws-lambda-support/-/actor-system-aws-lambda-support-0.1.3.tgz#3b4af75c647091c3a4a7fc9e945c4ac1a8b79142"
+  integrity sha512-ghh1ei1nnP+rN+b8FMAHc65aimzFkJXHY5r2zLo6yWjUT3kyhySPlMnKuKY/C+cmU+ZRkeWjTdkCaXn52A/0qQ==
   dependencies:
-    "@yingyeothon/actor-system" "^0.1.2"
+    "@yingyeothon/actor-system" "^0.1.5"
+    "@yingyeothon/logger" "^0.1.0"
   optionalDependencies:
     aws-sdk "2.437.0"
 
-"@yingyeothon/actor-system-redis-support@^0.1.0":
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/@yingyeothon/actor-system-redis-support/-/actor-system-redis-support-0.1.0.tgz#3f9f975babaaef0003216a823525a4726917cf75"
-  integrity sha512-rPHfG2ZOKZ8sviEttvH+5x7mrEegXW80Er56InyMShIk/VdjPOlV6IZXq5j8QyDCkW7P6BRwXwp6O1EoO8YehQ==
+"@yingyeothon/actor-system-redis-support@^0.1.2":
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/@yingyeothon/actor-system-redis-support/-/actor-system-redis-support-0.1.2.tgz#42f135bfdfd53523450a6949d12ceaca7b9abb01"
+  integrity sha512-AbZHTTCHV3m8k5gK8dIaHczWIN8dv2yKq/nO53QyiQrbQhWSif0JTpYjwdxF9gAv7YP7/OMMiPhvf4g0CMDcgg==
   dependencies:
-    "@yingyeothon/actor-system" "^0.1.2"
+    "@yingyeothon/actor-system" "^0.1.5"
     "@yingyeothon/codec" "^0.1.0"
+    "@yingyeothon/logger" "^0.1.0"
     ioredis "^4.11.2"
 
-"@yingyeothon/actor-system@^0.1.2":
-  version "0.1.2"
-  resolved "https://registry.yarnpkg.com/@yingyeothon/actor-system/-/actor-system-0.1.2.tgz#f46e52fa5fde3d1adb3e5c50630a6c45ee07f3a3"
-  integrity sha512-CvQoWMKw97oIrpsAkvhL+Jg7qW8OxGTvozcukfXoqx71IlVSMTzq4S0XrlytuE2Ro0QzVwyxDv7x6QUOGZYCJw==
+"@yingyeothon/actor-system@^0.1.5":
+  version "0.1.5"
+  resolved "https://registry.yarnpkg.com/@yingyeothon/actor-system/-/actor-system-0.1.5.tgz#102f4fd17827a9a4c4225d421fe39e0316c39afe"
+  integrity sha512-5ZXHbOV1h8jPe+KV7XJ33QpKMpC4mtYMwHun0iSXvnASzll0kpFyK7s/EI4fnp0qSyY7v1rgK6iNnp2b7STfxw==
   dependencies:
     "@yingyeothon/event-broker" "^0.1.0"
+    "@yingyeothon/logger" "^0.1.0"
+
+"@yingyeothon/aws-lambda-custom-authorizer@^0.1.0":
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/@yingyeothon/aws-lambda-custom-authorizer/-/aws-lambda-custom-authorizer-0.1.0.tgz#639658f008081842ec5541bc700d6fc41c8cde22"
+  integrity sha512-AdQfe7UNWpftWwaB7j+7ebuSQXIjnWdHiEBwqej9BzRSV1MfrPQX1YXfx4dedpP8pvIBih2F8uwC/FADnLmSOw==
+  dependencies:
+    "@yingyeothon/logger" "^0.1.0"
+
+"@yingyeothon/aws-lambda-jwt-custom-authorizer@^0.1.0":
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/@yingyeothon/aws-lambda-jwt-custom-authorizer/-/aws-lambda-jwt-custom-authorizer-0.1.0.tgz#18c9fae6b7d5065969fd4e20a4af580a6b290692"
+  integrity sha512-LoxQE4mJH8dBeOM9M77dg+pvGDcx/nvAwzlPvr53wj02c+eqd9lUffNAZKo8arJW/k0zhZNHOSMbewpOl+yjlQ==
+  dependencies:
+    "@yingyeothon/aws-lambda-custom-authorizer" "^0.1.0"
+    "@yingyeothon/logger" "^0.1.0"
+    jsonwebtoken "^8.5.1"
 
 "@yingyeothon/codec@^0.1.0":
   version "0.1.0"
@@ -287,14 +306,20 @@
   resolved "https://registry.yarnpkg.com/@yingyeothon/event-broker/-/event-broker-0.1.0.tgz#0dd3d84cb480fc55791a9033c20d769429d23ba6"
   integrity sha512-65Clrb9GGo5cAkwNTmYHfG/oShMuaecjUwyNGLefKCD0ekcdB3ottlVSldPlpFiM05i1QIGrnpFxY/mdzK0V6g==
 
-"@yingyeothon/repository-redis@^0.1.0":
+"@yingyeothon/logger@^0.1.0":
   version "0.1.0"
-  resolved "https://registry.yarnpkg.com/@yingyeothon/repository-redis/-/repository-redis-0.1.0.tgz#7fff670291b3eccb6844e62c38136e0463d9ed79"
-  integrity sha512-qaJMiUhiX5TGxdqO/CbCXwQCpdlmP9/hx2awoJVgbb/fqCQKQNfQBkDGo2b+Iv35uz1ik3cTd6tHYh8gr99HvQ==
+  resolved "https://registry.yarnpkg.com/@yingyeothon/logger/-/logger-0.1.0.tgz#8682b912b913ac7979ecf256a786b43489852716"
+  integrity sha512-LdEkgLyeNQWC/wz9q8iVPwQFFaRALP8WoexgjukjrkTP6sEJTUnbWFkH1t5BKK0T7C56yY1uc/WoWYJ6l27K0Q==
+
+"@yingyeothon/repository-s3@^0.1.0":
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/@yingyeothon/repository-s3/-/repository-s3-0.1.0.tgz#52cbef64ce866f7e32331fb557ce0fa01ff4ac55"
+  integrity sha512-1lPXiq5Rcu7q+gjEnEt5mYbq9OMS1akDsg5KQmtCnqr78RzKBdpEOhrfrgaSsXN2972jwu7I819r2pN4oN3Irw==
   dependencies:
     "@yingyeothon/codec" "^0.1.0"
     "@yingyeothon/repository" "^0.1.2"
-    ioredis "^4.11.1"
+  optionalDependencies:
+    aws-sdk "2.437.0"
 
 "@yingyeothon/repository@^0.1.2":
   version "0.1.2"
@@ -787,6 +812,11 @@ buffer-crc32@^0.2.1, buffer-crc32@~0.2.3:
   version "0.2.13"
   resolved "https://registry.yarnpkg.com/buffer-crc32/-/buffer-crc32-0.2.13.tgz#0d333e3f00eac50aa1454abd30ef8c2a5d9a7242"
   integrity sha1-DTM+PwDqxQqhRUq9MO+MKl2ackI=
+
+buffer-equal-constant-time@1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/buffer-equal-constant-time/-/buffer-equal-constant-time-1.0.1.tgz#f8e71132f7ffe6e01a5c9697a4c6f3e48d5cc819"
+  integrity sha1-+OcRMvf/5uAaXJaXpMbz5I1cyBk=
 
 buffer-fill@^1.0.0:
   version "1.0.0"
@@ -1460,6 +1490,13 @@ duplexify@^3.4.2, duplexify@^3.6.0:
     inherits "^2.0.1"
     readable-stream "^2.0.0"
     stream-shift "^1.0.0"
+
+ecdsa-sig-formatter@1.0.11:
+  version "1.0.11"
+  resolved "https://registry.yarnpkg.com/ecdsa-sig-formatter/-/ecdsa-sig-formatter-1.0.11.tgz#ae0f0fa2d85045ef14a817daa3ce9acd0489e5bf"
+  integrity sha512-nagl3RYrbNv6kQkeJIpt6NJZy8twLB/2vtz6yN9Z4vRKHN4/QZJIEbqohALSgwKdnksuY3k5Addp5lg8sVoVcQ==
+  dependencies:
+    safe-buffer "^5.0.1"
 
 ee-first@1.1.1:
   version "1.1.1"
@@ -2288,7 +2325,7 @@ inquirer@^1.0.2:
     strip-ansi "^3.0.0"
     through "^2.3.6"
 
-ioredis@^4.11.1, ioredis@^4.11.2:
+ioredis@^4.11.2:
   version "4.11.2"
   resolved "https://registry.yarnpkg.com/ioredis/-/ioredis-4.11.2.tgz#b76c1a8290f581ce30af3fd00f27d38a301472c6"
   integrity sha512-2lQM1jpTzoTPg9Lj+ayfcIn8rdvGwgNP/nzeJ7IW4va/ExqxttRnTlUaxa8jOsj/e4NYKtVkbuhEAvOVPwjztA==
@@ -2637,6 +2674,22 @@ jsonfile@^4.0.0:
   optionalDependencies:
     graceful-fs "^4.1.6"
 
+jsonwebtoken@^8.5.1:
+  version "8.5.1"
+  resolved "https://registry.yarnpkg.com/jsonwebtoken/-/jsonwebtoken-8.5.1.tgz#00e71e0b8df54c2121a1f26137df2280673bcc0d"
+  integrity sha512-XjwVfRS6jTMsqYs0EsuJ4LGxXV14zQybNd4L2r0UvbVnSF9Af8x7p5MzbJ90Ioz/9TI41/hTCvznF/loiSzn8w==
+  dependencies:
+    jws "^3.2.2"
+    lodash.includes "^4.3.0"
+    lodash.isboolean "^3.0.3"
+    lodash.isinteger "^4.0.4"
+    lodash.isnumber "^3.0.3"
+    lodash.isplainobject "^4.0.6"
+    lodash.isstring "^4.0.1"
+    lodash.once "^4.0.0"
+    ms "^2.1.1"
+    semver "^5.6.0"
+
 jszip@^3.2.1:
   version "3.2.2"
   resolved "https://registry.yarnpkg.com/jszip/-/jszip-3.2.2.tgz#b143816df7e106a9597a94c77493385adca5bd1d"
@@ -2646,6 +2699,23 @@ jszip@^3.2.1:
     pako "~1.0.2"
     readable-stream "~2.3.6"
     set-immediate-shim "~1.0.1"
+
+jwa@^1.4.1:
+  version "1.4.1"
+  resolved "https://registry.yarnpkg.com/jwa/-/jwa-1.4.1.tgz#743c32985cb9e98655530d53641b66c8645b039a"
+  integrity sha512-qiLX/xhEEFKUAJ6FiBMbes3w9ATzyk5W7Hvzpa/SLYdxNtng+gcurvrI7TbACjIXlsJyr05/S1oUhZrc63evQA==
+  dependencies:
+    buffer-equal-constant-time "1.0.1"
+    ecdsa-sig-formatter "1.0.11"
+    safe-buffer "^5.0.1"
+
+jws@^3.2.2:
+  version "3.2.2"
+  resolved "https://registry.yarnpkg.com/jws/-/jws-3.2.2.tgz#001099f3639468c9414000e99995fa52fb478304"
+  integrity sha512-YHlZCB6lMTllWDtSPHz/ZXTsi8S00usEV6v1tjq8tOUZzw7DpSDWVXjXDre6ed1w/pd495ODpHZYSdkRTsa0HA==
+  dependencies:
+    jwa "^1.4.1"
+    safe-buffer "^5.0.1"
 
 jwt-decode@^2.2.0:
   version "2.2.0"
@@ -2740,6 +2810,41 @@ lodash.flatten@^4.4.0:
   version "4.4.0"
   resolved "https://registry.yarnpkg.com/lodash.flatten/-/lodash.flatten-4.4.0.tgz#f31c22225a9632d2bbf8e4addbef240aa765a61f"
   integrity sha1-8xwiIlqWMtK7+OSt2+8kCqdlph8=
+
+lodash.includes@^4.3.0:
+  version "4.3.0"
+  resolved "https://registry.yarnpkg.com/lodash.includes/-/lodash.includes-4.3.0.tgz#60bb98a87cb923c68ca1e51325483314849f553f"
+  integrity sha1-YLuYqHy5I8aMoeUTJUgzFISfVT8=
+
+lodash.isboolean@^3.0.3:
+  version "3.0.3"
+  resolved "https://registry.yarnpkg.com/lodash.isboolean/-/lodash.isboolean-3.0.3.tgz#6c2e171db2a257cd96802fd43b01b20d5f5870f6"
+  integrity sha1-bC4XHbKiV82WgC/UOwGyDV9YcPY=
+
+lodash.isinteger@^4.0.4:
+  version "4.0.4"
+  resolved "https://registry.yarnpkg.com/lodash.isinteger/-/lodash.isinteger-4.0.4.tgz#619c0af3d03f8b04c31f5882840b77b11cd68343"
+  integrity sha1-YZwK89A/iwTDH1iChAt3sRzWg0M=
+
+lodash.isnumber@^3.0.3:
+  version "3.0.3"
+  resolved "https://registry.yarnpkg.com/lodash.isnumber/-/lodash.isnumber-3.0.3.tgz#3ce76810c5928d03352301ac287317f11c0b1ffc"
+  integrity sha1-POdoEMWSjQM1IwGsKHMX8RwLH/w=
+
+lodash.isplainobject@^4.0.6:
+  version "4.0.6"
+  resolved "https://registry.yarnpkg.com/lodash.isplainobject/-/lodash.isplainobject-4.0.6.tgz#7c526a52d89b45c45cc690b88163be0497f550cb"
+  integrity sha1-fFJqUtibRcRcxpC4gWO+BJf1UMs=
+
+lodash.isstring@^4.0.1:
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/lodash.isstring/-/lodash.isstring-4.0.1.tgz#d527dfb5456eca7cc9bb95d5daeaf88ba54a5451"
+  integrity sha1-1SfftUVuynzJu5XV2ur4i6VKVFE=
+
+lodash.once@^4.0.0:
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/lodash.once/-/lodash.once-4.1.1.tgz#0dd3971213c7c56df880977d504c88fb471a97ac"
+  integrity sha1-DdOXEhPHxW34gJd9UEyI+0cal6w=
 
 lodash.pad@^4.1.0:
   version "4.5.1"

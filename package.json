@@ -5,10 +5,12 @@
   "main": "handler.ts",
   "scripts": {},
   "dependencies": {
-    "@yingyeothon/actor-system": "^0.1.2",
-    "@yingyeothon/actor-system-aws-lambda-support": "^0.1.1",
-    "@yingyeothon/actor-system-redis-support": "^0.1.0",
-    "@yingyeothon/repository-redis": "^0.1.0",
+    "@yingyeothon/actor-system": "^0.1.5",
+    "@yingyeothon/actor-system-aws-lambda-support": "^0.1.3",
+    "@yingyeothon/actor-system-redis-support": "^0.1.2",
+    "@yingyeothon/aws-lambda-jwt-custom-authorizer": "^0.1.0",
+    "@yingyeothon/logger": "^0.1.0",
+    "@yingyeothon/repository-s3": "^0.1.0",
     "ioredis": "^4.11.2",
     "source-map-support": "^0.5.12"
   },

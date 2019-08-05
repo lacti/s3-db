@@ -1,5 +1,5 @@
 service:
-  name: s3-db
+  name: s3-simple-db
 
 plugins:
   - serverless-webpack
@@ -8,33 +8,77 @@ provider:
   name: aws
   runtime: nodejs10.x
   region: ap-northeast-2
+  tracing:
+    apiGateway: true
+    lambda: true
   environment:
+    AUTH_ID: ${env:AUTH_ID}
+    AUTH_PASSWORD: ${env:AUTH_PASSWORD}
+    JWT_SECRET: ${env:JWT_SECRET}
     REDIS_HOST: ${env:REDIS_HOST}
     REDIS_PASSWORD: ${env:REDIS_PASSWORD}
+    BUCKET_NAME: ${env:BUCKET_NAME}
     BOTTOM_HALF_LAMBDA: ${self:custom.BOTTOM_HALF_LAMBDA}
   iamRoleStatements:
     - Effect: Allow
       Action:
         - lambda:InvokeFunction
       Resource: "*"
+    - Effect: "Allow"
+      Action:
+        - "s3:HeadObject"
+        - "s3:GetObject"
+        - "s3:PutObject"
+        - "s3:DeleteObject"
+      Resource:
+        - "arn:aws:s3:::${env:BUCKET_NAME}/*"
+    - Effect: "Allow"
+      Action:
+        - "s3:ListBucket"
+      Resource:
+        - "arn:aws:s3:::${env:BUCKET_NAME}"
 
 custom:
   BOTTOM_HALF_LAMBDA: ${self:service.name}-${self:provider.stage}-defer
 
 functions:
+  auth:
+    handler: src/auth.handle
+  login:
+    handler: src/auth.login
+    events:
+      - http:
+          method: post
+          path: /login
+          authorizer:
+            name: auth
+            resultTtlInSeconds: 0
   put:
-    handler: src/db.topHalf
+    handler: src/handler.topHalf
     timeout: 6
     events:
       - http:
           method: put
-          path: /{actorName}
+          path: /{name+}
+          authorizer:
+            name: auth
+            resultTtlInSeconds: 0
   get:
-    handler: src/db.get
+    handler: src/handler.get
     events:
       - http:
           method: get
-          path: /{actorName}
+          path: /{name+}
+          authorizer:
+            name: auth
+            resultTtlInSeconds: 0
   defer:
-    handler: src/db.bottomHalf
+    handler: src/handler.bottomHalf
     timeout: 900
+
+resources:
+  Resources:
+    ConfigBucket:
+      Type: AWS::S3::Bucket
+      Properties:
+        BucketName: ${env:BUCKET_NAME}
