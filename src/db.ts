@@ -11,10 +11,13 @@ type DocumentType = "plain" | "map" | "list";
 
 export const parseActorFromUrlPath = (urlPath: string) => {
   const docType = (path.extname(urlPath) || ".plain").toLowerCase().substr(1);
-  const docPath = urlPath.replace(new RegExp(path.extname(urlPath) + "$"), "");
   if (!docTypes.includes(docType)) {
     throw new Error(`Invalid docType[${docType}] from urlPath[${urlPath}]`);
   }
+  const nameOnly = urlPath.replace(new RegExp(path.extname(urlPath) + "$"), "");
+  const docPath = nameOnly.startsWith("/")
+    ? nameOnly.substr(1)
+    : nameOnly + "." + docType;
   return { docType: docType as DocumentType, docPath };
 };
 

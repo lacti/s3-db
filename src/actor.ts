@@ -19,10 +19,11 @@ const sys = new ActorSystem({
   logger
 });
 
-export const getDatabaseActorFromUrlPath = (urlPath: string) => {
-  const { docType, docPath } = parseActorFromUrlPath(urlPath);
-  logger.debug(`init-actor`, urlPath, docType, docPath);
-  return sys.spawn<any>(urlPath, newActor =>
+export const getDatabaseActorFromActorName = (actorName: string) => {
+  logger.debug(`actor-resource`, actorName);
+  const { docType, docPath } = parseActorFromUrlPath(actorName);
+  logger.debug(`init-actor`, actorName, docType, docPath);
+  return sys.spawn<any>(docPath, newActor =>
     newActor
       .on("act", async ({ message }) => {
         logger.debug(`update-key-value`, docType, docPath, message);
