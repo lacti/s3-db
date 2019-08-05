@@ -50,6 +50,7 @@ functions:
       - http:
           method: post
           path: /login
+          cors: true
           authorizer:
             name: auth
             resultTtlInSeconds: 0
@@ -60,6 +61,7 @@ functions:
       - http:
           method: put
           path: /{name+}
+          cors: true
           authorizer:
             name: auth
             resultTtlInSeconds: 0
@@ -69,6 +71,7 @@ functions:
       - http:
           method: get
           path: /{name+}
+          cors: true
           authorizer:
             name: auth
             resultTtlInSeconds: 0
