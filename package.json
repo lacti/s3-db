@@ -18,7 +18,7 @@
     "@types/aws-lambda": "^8.10.27",
     "@types/ioredis": "^4.0.13",
     "@types/node": "10",
-    "aws-sdk": "^2.486.0",
+    "aws-sdk": "^2.814.0",
     "lodash": "^4.17.13",
     "prettier": "^1.18.2",
     "serverless": "^1.46.1",
